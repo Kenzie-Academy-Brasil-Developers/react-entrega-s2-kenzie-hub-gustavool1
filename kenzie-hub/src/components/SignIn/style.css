@@ -1,0 +1,23 @@
+.add-tech{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+textarea{
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    height: 50px;
+}
+
+.fields input{
+   margin: 5px;
+   height: px;
+}
+.fields p {
+    color: red;
+}
+.btn{
+    margin-top: 50px;
+}
