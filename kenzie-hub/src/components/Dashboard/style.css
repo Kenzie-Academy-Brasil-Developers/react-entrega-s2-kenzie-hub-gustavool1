@@ -1,0 +1,49 @@
+form{
+    width: 99%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+form input{
+    color: white;
+}
+.dashboard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+ul{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0px;
+}
+.tech-container{
+    border: none;
+    margin: 20px;
+   padding: 20px;
+    border-radius: 4px;
+    text-align: center;
+    background-color: #9aaec7c9  ;
+    color: white;
+    box-shadow: 5px 5px  #b2c0d1c9;
+    transition: 1s;
+}
+.tech-container:hover{
+    box-shadow: 1px 2px  #b2c0d1c9;
+}
+.Logout{
+    margin-left:50px ;
+}
+h1{
+    color: white;
+}
+
+@media screen and (min-width:768px) {
+    ul{
+        flex-direction: row;
+    }
+}

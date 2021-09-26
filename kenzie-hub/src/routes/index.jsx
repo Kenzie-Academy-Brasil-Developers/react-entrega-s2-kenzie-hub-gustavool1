@@ -22,7 +22,7 @@ const Routes = () =>{
                 <SignUp   authenticated={authenticated} setAuthenticated={setAuthenticated}/>
             </Route>
             <Route exact path='/dashboard' >
-                <Dashboard authenticated={authenticated} />
+                <Dashboard authenticated={authenticated} setAuthenticated={setAuthenticated}  />
             </Route>
         </Switch>
     )

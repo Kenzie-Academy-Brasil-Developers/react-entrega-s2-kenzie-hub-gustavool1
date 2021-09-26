@@ -2,13 +2,29 @@ import { Button, TextField } from "@mui/material"
 import Formulario from "../../StyledComponents/Form/style"
 import { useForm } from "react-hook-form"
 import axios from "axios"
-import { useHistory } from "react-router"
+import { useHistory, Link } from "react-router-dom"
 import { useEffect } from "react"
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { toast } from 'react-toastify'
+import './style.css'
+import 'react-toastify/dist/ReactToastify.css';
 const LogIn = ({ authenticated ,setAuthenticated }) =>{
-    const { register, handleSubmit } = useForm();
+    toast.configure()
+    const formScheme = yup.object().shape({
+        email: yup.string().required("Email obrigatório").email('Insira um email válido'),
+        password:yup.string().required("Senha obrigatória")
+    })
+
+    const { register, handleSubmit, formState:{ errors } } = useForm({
+        resolver: yupResolver(formScheme)
+    });
+
     const history = useHistory()
+
     const onSubmit = (data) =>{
         console.log(data)
+        
         axios.post("https://kenziehub.herokuapp.com/sessions", data)
          .then((response)=>{
              const { token } = response.data
@@ -16,22 +32,27 @@ const LogIn = ({ authenticated ,setAuthenticated }) =>{
              localStorage.setItem("@KenzieHub:token", token)
              localStorage.setItem("@User:userId", response.data.user.id)
              setAuthenticated(true)
+             toast.success('Bem vindo ao Kenzie Hub ')
              history.push('/dashboard')
          })
-          .catch((err)=>console.log(err))
+          .catch((err)=>{
+              
+              toast.error('Senha ou email, incorretos')
+          })
     }
     useEffect(()=>{
         if(authenticated){
             history.push('/dashboard')
         }
+        //eslint-disable-next-line
     }, [authenticated])
-    
+    console.log(errors)
     return (
-        <Formulario onSubmit={ handleSubmit(onSubmit) } >
+        <Formulario  className='login'onSubmit={ handleSubmit(onSubmit) } >
             <h1>Login</h1>
-            <TextField  className='fields' label="Email" variant="outlined" {...register("email")} />
-            <TextField  className='fields' label="Senha" variant="outlined" {...register("password")}/>
-            <Button type='submit'>Entrar</Button>
+            <TextField sx={{m:2}} className='fields' label="Email" variant="outlined" {...register("email")}  helperText={errors.email?.message}/>
+            <TextField sx={{m:2}}className='fields' label="Senha" variant="outlined" {...register("password")} helperText={errors.password?.message}/>
+            <Button type='submit'>Entrar</Button><Link to='/signUp'>Não está cadastrado ainda ? <span>Cadastre-se</span></Link>
         </Formulario>
     )
 }

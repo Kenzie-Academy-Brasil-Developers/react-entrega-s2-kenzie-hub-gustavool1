@@ -1,6 +1,11 @@
+body{
+  background-image: url("https://i.pinimg.com/originals/e7/df/94/e7df94160c2b3127ccf5fa7cace660f6.jpg");
+}
 .App {
+  height:100%;
   display: flex;
   justify-content: center;
+ 
 }
 
 .App-logo {
@@ -14,16 +19,7 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+
 
 .App-link {
   color: #61dafb;
