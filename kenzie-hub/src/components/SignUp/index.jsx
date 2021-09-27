@@ -68,7 +68,7 @@ const SignUp = ({ authenticated, setAuthenticated}) =>{
 
             <TextField sx={{m:2,width:"90%"}} className='fields'label="Confirmar email" variant="filled" {...register('confirmEmail')} helperText={errors.confirmEmail?.message}/>
 
-            <TextField sx={{m:2,width:"90%"}}className='fields' label='Digite seu numero de telefone-celular' {...register('contact')} helperText={errors.contact?.message}/>
+            <TextField sx={{m:2,width:"90%"}}className='fields' label='Insira sua rede social' {...register('contact')} helperText={errors.contact?.message}/>
 
             <TextField sx={{m:2,width:"90%"}}placeholder='Escreva sua bio' {...register('bio')} helperText={errors.bio?.message} multiline rows={3} rowsMax={10}/>
             <TextField
@@ -87,9 +87,9 @@ const SignUp = ({ authenticated, setAuthenticated}) =>{
                 ))}
             </TextField>
 
-            <TextField sx={{m:2, color:"white", width:"90%"}}className='fields' label='Senha' {...register('password')} helperText={errors.password?.message} />
+            <TextField type='password' sx={{m:2, color:"white", width:"90%"}}className='fields' label='Senha' {...register('password')} helperText={errors.password?.message} />
 
-            <TextField sx={{m:2, color:"white", width:"90%"}}className='fields' label='Confirmar senha' {...register('confirmPassword')} helperText={errors.confirmPassword?.message}/>
+            <TextField type='password' sx={{m:2, color:"white", width:"90%"}}className='fields' label='Confirmar senha' {...register('confirmPassword')} helperText={errors.confirmPassword?.message}/>
 
             <Button type='submit'>Enviar</Button>
             <Link to='/'>Ja possuí uma conta? <span>Logar</span></Link>
