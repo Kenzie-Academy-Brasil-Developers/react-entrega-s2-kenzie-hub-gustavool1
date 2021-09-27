@@ -13,7 +13,7 @@ const Formulario = styled.form`
     border-radius: 10px;
     border: 1px solid rgba( 255, 255, 255, 0.18 );
     text-align: center;
-    width: 50%;
+    width: 100%;
     h1{
         font-size:25px;
     }

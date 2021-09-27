@@ -5,9 +5,7 @@ form{
     align-items: center;
     flex-direction: column;
 }
-form input{
-    color: white;
-}
+
 .dashboard{
     display: flex;
     flex-direction: column;

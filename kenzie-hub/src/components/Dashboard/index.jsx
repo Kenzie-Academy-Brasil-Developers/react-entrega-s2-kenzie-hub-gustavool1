@@ -1,27 +1,34 @@
 import { useEffect, useState } from "react"
 import {  Redirect } from "react-router-dom"
 import axios from 'axios'
-import { Button, TextField, MenuItem, Select } from "@mui/material"
-import { makeStyles } from '@mui/styles';
+import { Button, TextField, MenuItem } from "@mui/material"
 import { useHistory } from "react-router";
 import { useForm } from 'react-hook-form'
 import './style.css'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 const Dashboard = ({ authenticated, setAuthenticated }) =>{
-    const useStyles = makeStyles({
-        buttonStyle:{
-            color:"red"
+    const curriencies = [
+        {
+            value:"Iniciante",
+            label:'Iniciante'
+        },
+        {
+            value:"Intermediário",
+            label:"Intermediário"
+        },
+        {
+            value:"Avançado",
+            label:"Avançado"
         }
-    })
+    ]
     const history = useHistory()
-    const  classes = useStyles()
     const { register, handleSubmit } = useForm()
-    const [ newTechLevel, setNewTechLevel ] = useState("")
+    const [ currency, setCurrency ] = useState('Iniciante')
     const [ newTech, setNewTech ] = useState(null)
     const id = localStorage.getItem("@User:userId")
     const token = localStorage.getItem('@KenzieHub:token')
-    console.log(classes)
+    
     const callingApi = () =>{  
         axios.get(`https://kenziehub.herokuapp.com/users/${id}`)
         .then((response)=>{
@@ -46,9 +53,7 @@ const Dashboard = ({ authenticated, setAuthenticated }) =>{
 
 
     const onSubmitCreateTech = (data) =>{
-        console.log(token)
-        console.log(data)
-        const toApi= {"title":data.newTechLevel, "status":newTechLevel}  
+        const toApi= {"title":data.newTechLevel, "status":currency}  
         console.log(toApi)
         axios.post("https://kenziehub.herokuapp.com/users/techs", toApi, {
             headers:{
@@ -87,19 +92,24 @@ const Dashboard = ({ authenticated, setAuthenticated }) =>{
             <div className='dashboard'>
                 <form onSubmit={handleSubmit(onSubmitCreateTech)}>
                     
-                    <TextField sx={{color:"white", width:"100%"}}placeholder='Digite a nova tecnologia' {...register('newTechLevel')}/>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={newTechLevel}
-                        label="Age"
-                        onChange={(e)=> setNewTechLevel(e.target.value)}
-                        sx= {{border:"1px solid white", width:"30%", color:"white"}}
+                    <TextField sx={{m:2, width:"100%"}}placeholder='Digite a nova tecnologia' variant='outlined' {...register('newTechLevel')}/>
+                    <TextField
+                        id="outlined-select-currency"
+                        select
+                        value={currency}
+                        label="Insira a seu conhecimento sobre a tec"
+                        onChange={(e)=> setCurrency(e.target.value)}
+                        sx= {{width:"50%", m:2}}
                     >
-                        <MenuItem value="Iniciante">Iniciante</MenuItem>
-                        <MenuItem value="Intermediário">Intermediário</MenuItem>
-                        <MenuItem value="Avançado">Avançado</MenuItem>
-                    </Select>
+                    
+                    {
+                        curriencies.map((option)=>(
+                            <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                            </MenuItem>
+                        ))
+                    }
+                    </TextField>
                     <Button type='submit'>Nova tecnologia</Button>
                 </form>
                 
