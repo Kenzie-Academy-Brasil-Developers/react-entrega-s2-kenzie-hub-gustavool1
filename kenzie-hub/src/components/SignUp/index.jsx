@@ -11,7 +11,7 @@ import * as yup from 'yup'
 import { useHistory, Link } from "react-router-dom"
 const SignUp = ({ authenticated, setAuthenticated}) =>{
     const history = useHistory()
-    if(!authenticated){
+    if(authenticated){
         history.push('/')
     }
     toast.configure()
