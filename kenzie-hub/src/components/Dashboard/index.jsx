@@ -36,7 +36,6 @@ const Dashboard = ({ authenticated, setAuthenticated }) =>{
             setNewTech([...response.data.techs])
                
         })
-        .catch((err)=> console.log(err))
     }
     
     useEffect(()=>{
@@ -50,8 +49,6 @@ const Dashboard = ({ authenticated, setAuthenticated }) =>{
         return <Redirect to='/'/>
 
     }
-
-
     const onSubmitCreateTech = (data) =>{
         const toApi= {"title":data.newTechLevel, "status":currency}  
         console.log(toApi)
@@ -66,10 +63,8 @@ const Dashboard = ({ authenticated, setAuthenticated }) =>{
             toast.error('Impossível cadastrar esta tecnologia')
         })
     }
-
-
     const deleteTech = (id) =>{
-        console.log(id)
+       
         axios.delete(`https://kenziehub.herokuapp.com/users/techs/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -78,7 +73,6 @@ const Dashboard = ({ authenticated, setAuthenticated }) =>{
             callingApi()
             toast.success("Tecnologia deletada com sucesso")
         })
-        console.log('deletado')
     }
 
     const handleLogout = () =>{
@@ -101,7 +95,6 @@ const Dashboard = ({ authenticated, setAuthenticated }) =>{
                         onChange={(e)=> setCurrency(e.target.value)}
                         sx= {{width:"50%", m:2}}
                     >
-                    
                     {
                         curriencies.map((option)=>(
                             <MenuItem key={option.value} value={option.value}>
